@@ -10,8 +10,8 @@ function toggleRadio() {
     button.textContent = "▶ Escuchar";
   }
 }
-// URL de tu Worker
-const NEWS_URL = https://misty-bread-a143.marcpetitsalas.workers.dev;
+// URL de tu Worker que devuelve noticias
+const NEWS_URL = "https://misty-bread-a143.marcpetitsalas.workers.dev/";
 
 fetch(NEWS_URL)
   .then(res => res.json())
