@@ -39,7 +39,7 @@ programs.forEach(program => {
   container.appendChild(section);
 
   // Construïm la URL del RSS
-  const rssUrl = `https://rssraw.enacastapis.com/podcast_rss/radiocanetdemar/${program.slug}.rss`;
+  const rssUrl = `https://rssraw.enacastapis.com/podcast_rss/radiocanetdemar/informatiumigdia.rss`;
 
   // Convertim RSS a JSON via rss2json
   fetch(`https://api.rss2json.com/v1/api.json?rss_url=${rssUrl}`)
