@@ -7,7 +7,7 @@ function toggleRadio() {
     button.textContent = "⏸ Pausar";
   } else {
     player.pause();
-    button.textContent = "▶ Escuchar";
+    button.textContent = "▶ Escoltar";
   }
 }
 // URL de tu Worker que devuelve noticias
@@ -34,7 +34,7 @@ fetch(NEWS_URL)
     });
   })
   .catch(err => {
-    document.getElementById("news").textContent = "No se pudieron cargar las noticias.";
+    document.getElementById("news").textContent = "No s'han pogut carregar les notìcies.";
   });
 
 
