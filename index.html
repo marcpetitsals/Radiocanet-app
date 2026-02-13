@@ -30,12 +30,18 @@
   }
 
   .header img.logo {
-    width: 120px; /* més petit per mòbil */
+    width: 250px; /* gran per ordinador */
     height: auto;
     object-fit: contain;
   }
 
-  /* SECCIÓ EMISSIÓ EN DIRECTE */
+  @media (max-width: 480px) {
+    .header img.logo {
+      width: 120px; /* petit per mòbil */
+    }
+  }
+
+  /* EMISSIÓ EN DIRECTE */
   .live-section {
     width: 90%;
     max-width: 400px;
@@ -60,7 +66,7 @@
     background-color: #fff;
   }
 
-  /* SECCIÓ NOTICIES */
+  /* NOTICIES */
   .news-section {
     width: 95%;
     margin-top: 30px;
@@ -154,7 +160,6 @@
     font-size: 18px;
     margin: 0;
   }
-
 </style>
 </head>
 <body>
@@ -195,29 +200,34 @@ const tags = [
 ];
 
 const newsContainer = document.getElementById("news-container");
+const oneMonthAgo = new Date();
+oneMonthAgo.setMonth(oneMonthAgo.getMonth() -1);
 
 tags.forEach(tag => {
-  const tagBox = document.createElement("div");
-  tagBox.className = "tag-box";
-  tagBox.innerHTML = `<h3>${tag.name}</h3>`;
-  newsContainer.appendChild(tagBox);
-
   fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(tag.rss)}`)
     .then(res => res.json())
     .then(data => {
-      if(!data.items || data.items.length === 0) {
-        tagBox.innerHTML += "<p>No hi ha notícies disponibles.</p>";
-        return;
-      }
+      if(!data.items || data.items.length === 0) return;
 
-      data.items.slice(0,3).forEach((item, index) => {
+      // Filtrar per últim mes
+      const recentItems = data.items.filter(item => {
+        const pubDate = new Date(item.pubDate);
+        return pubDate >= oneMonthAgo;
+      });
+
+      if(recentItems.length === 0) return; // Si cap notícia recent, no apareix la secció
+
+      const tagBox = document.createElement("div");
+      tagBox.className = "tag-box";
+      tagBox.innerHTML = `<h3>${tag.name}</h3>`;
+      newsContainer.appendChild(tagBox);
+
+      recentItems.slice(0,3).forEach((item,index) => {
         const newsItem = document.createElement("div");
         newsItem.className = "news-item";
 
-        // Només primera notícia amb foto
         const imgHtml = index === 0 && item.thumbnail ? `<img src="${item.thumbnail}" alt="Foto notícia">` : '';
 
-        // Data
         const dateObj = new Date(item.pubDate);
         const dateStr = dateObj.toLocaleDateString('ca-ES', { year: 'numeric', month: 'short', day: 'numeric' });
 
@@ -228,14 +238,10 @@ tags.forEach(tag => {
             <span class="date">${dateStr}</span>
           </div>
         `;
-
         tagBox.appendChild(newsItem);
       });
     })
-    .catch(err => {
-      console.error("Error carregant RSS:", err);
-      tagBox.innerHTML += "<p>No es van poder carregar notícies.</p>";
-    });
+    .catch(err => console.error("Error carregant RSS:", err));
 });
 </script>
 
