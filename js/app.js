@@ -37,7 +37,7 @@ programs.forEach(program => {
   section.innerHTML = `<h3>📻 ${program.name}</h3>`;
   container.appendChild(section);
 
-  const rssUrl = `https://www.radiocanet.cat/podcasts/${program.slug}/feed/`;
+  const rssUrl = `https://rssraw.enacastapis.com/podcast_rss/radiocanetdemar/${program.slug}/feed/`;
 
   fetch(`https://api.rss2json.com/v1/api.json?rss_url=${rssUrl}`)
     .then(res => res.json())
