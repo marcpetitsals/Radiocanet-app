@@ -1,136 +1,161 @@
 <!DOCTYPE html>
 <html lang="ca">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mini App Ràdio Canet</title>
-  <style>
-    /* GENERAL */
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-      background-color: white;
-      color: #333;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mini App Ràdio Canet</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: white;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+  }
 
-    /* HEADER */
-    .header {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      padding: 20px;
-      background: linear-gradient(to bottom, #5EB0E5, white);
-      border-bottom-left-radius: 15px;
-      border-bottom-right-radius: 15px;
-    }
+  /* HEADER */
+  .header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+    background: linear-gradient(to bottom, #5EB0E5, white);
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+  }
 
-    .header img.logo {
-      width: 85px;
-      height: 13px;
-      object-fit: contain;
-    }
+  .header img.logo {
+    width: 120px; /* més petit per mòbil */
+    height: auto;
+    object-fit: contain;
+  }
 
-    /* SECCIO EMISSIÓ EN DIRECTE */
-    .live-section {
-      width: 90%;
-      max-width: 400px;
-      background: white;
-      border-radius: 15px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      margin-top: 30px;
-      padding: 20px;
-      text-align: center;
-    }
+  /* SECCIÓ EMISSIÓ EN DIRECTE */
+  .live-section {
+    width: 90%;
+    max-width: 400px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    margin-top: 20px;
+    padding: 20px;
+    text-align: center;
+  }
 
-    .live-section h2 {
-      margin: 0 0 15px 0;
-      color: #3B5C96;
-      font-size: 18px;
-    }
+  .live-section h2 {
+    margin: 0 0 15px 0;
+    color: #3B5C96;
+    font-size: 18px;
+  }
 
-    .live-section audio {
-      width: 100%;
-      border-radius: 12px;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-      background-color: #fff;
-    }
+  .live-section audio {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    background-color: #fff;
+  }
 
-    /* SECCIO NOTICIES */
-    .news-section {
-      width: 95%;
-      margin-top: 40px;
-      margin-bottom: 40px;
-    }
+  /* SECCIÓ NOTICIES */
+  .news-section {
+    width: 95%;
+    margin-top: 30px;
+    margin-bottom: 40px;
+  }
 
-    .news-section h2 {
-      text-align: center;
-      color: #3B5C96;
-      margin-bottom: 20px;
-      font-size: 20px;
-    }
+  .news-section h2 {
+    text-align: center;
+    color: #3B5C96;
+    margin-bottom: 20px;
+    font-size: 20px;
+  }
 
-    #news-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-    }
+  #news-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
 
-    .tag-box {
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      padding: 15px;
-      width: 230px;
-    }
+  .tag-box {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    padding: 15px;
+    width: 100%;
+    max-width: 400px;
+  }
 
-    .tag-box h3 {
-      margin-top: 0;
-      color: #5EB0E5;
-      font-size: 16px;
-      text-align: center;
-      margin-bottom: 10px;
-    }
+  .tag-box h3 {
+    margin-top: 0;
+    color: #5EB0E5;
+    font-size: 16px;
+    text-align: center;
+    margin-bottom: 10px;
+  }
 
-    .news-item {
-      margin-bottom: 8px;
-    }
+  .news-item {
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px dotted #ccc;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
 
-    .news-item a {
-      text-decoration: none;
-      color: #333;
-      font-size: 14px;
-    }
+  .news-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
 
-    .news-item a:hover {
-      color: #3B5C96;
-    }
+  .news-item img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
 
-    /* FUTUR SECCIÓ */
-    .future-section {
-      width: 90%;
-      max-width: 400px;
-      background: #f8f8f8;
-      border-radius: 15px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-      padding: 20px;
-      margin-bottom: 40px;
-      text-align: center;
-    }
+  .news-text {
+    display: flex;
+    flex-direction: column;
+  }
 
-    .future-section h2 {
-      color: #5EB0E5;
-      font-size: 18px;
-      margin: 0;
-    }
+  .news-text a {
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+    font-weight: bold;
+  }
 
-  </style>
+  .news-text .date {
+    font-size: 12px;
+    color: #666;
+    margin-top: 3px;
+  }
+
+  /* FUTUR SECCIÓ */
+  .future-section {
+    width: 90%;
+    max-width: 400px;
+    background: #f8f8f8;
+    border-radius: 15px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    padding: 20px;
+    margin-bottom: 40px;
+    text-align: center;
+  }
+
+  .future-section h2 {
+    color: #5EB0E5;
+    font-size: 18px;
+    margin: 0;
+  }
+
+</style>
 </head>
 <body>
 
@@ -159,45 +184,60 @@
     <h2>Properament...</h2>
   </div>
 
-  <script>
-    const tags = [
-      { name: "Política", rss: "https://rssraw.enacastapis.com/news_rss/radiocanetdemar/Politica.rss" },
-      { name: "Economia", rss: "https://rssraw.enacastapis.com/news_rss/radiocanetdemar/Economia.rss" },
-      { name: "Societat", rss: "https://rssraw.enacastapis.com/news_rss/radiocanetdemar/Societat.rss" },
-      { name: "Esports", rss: "https://rssraw.enacastapis.com/news_rss/radiocanetdemar/Esports.rss" },
-      { name: "Cultura", rss: "https://rssraw.enacastapis.com/news_rss/radiocanetdemar/Cultura.rss" },
-      { name: "Ràdio Canet", rss: "https://rssraw.enacastapis.com/news_rss/radiocanetdemar/RadioCanet.rss" }
-    ];
+<script>
+const tags = [
+  { name: "Política", rss: "https://rssraw.enacastapis.com/news_rss/radiocanetdemar/Politica.rss" },
+  { name: "Economia", rss: "https://rssraw.enacastapis.com/news_rss/radiocanetdemar/Economia.rss" },
+  { name: "Societat", rss: "https://rssraw.enacastapis.com/news_rss/radiocanetdemar/Societat.rss" },
+  { name: "Esports", rss: "https://rssraw.enacastapis.com/news_rss/radiocanetdemar/Esports.rss" },
+  { name: "Cultura", rss: "https://rssraw.enacastapis.com/news_rss/radiocanetdemar/Cultura.rss" },
+  { name: "Ràdio Canet", rss: "https://rssraw.enacastapis.com/news_rss/radiocanetdemar/RadioCanet.rss" }
+];
 
-    const newsContainer = document.getElementById("news-container");
+const newsContainer = document.getElementById("news-container");
 
-    tags.forEach(tag => {
-      const tagBox = document.createElement("div");
-      tagBox.className = "tag-box";
-      tagBox.innerHTML = `<h3>${tag.name}</h3>`;
-      newsContainer.appendChild(tagBox);
+tags.forEach(tag => {
+  const tagBox = document.createElement("div");
+  tagBox.className = "tag-box";
+  tagBox.innerHTML = `<h3>${tag.name}</h3>`;
+  newsContainer.appendChild(tagBox);
 
-      fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(tag.rss)}`)
-        .then(res => res.json())
-        .then(data => {
-          if (!data.items || data.items.length === 0) {
-            tagBox.innerHTML += "<p>No hi ha notícies disponibles.</p>";
-            return;
-          }
+  fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(tag.rss)}`)
+    .then(res => res.json())
+    .then(data => {
+      if(!data.items || data.items.length === 0) {
+        tagBox.innerHTML += "<p>No hi ha notícies disponibles.</p>";
+        return;
+      }
 
-          data.items.slice(0,3).forEach(item => {
-            const newsItem = document.createElement("div");
-            newsItem.className = "news-item";
-            newsItem.innerHTML = `<a href="${item.link}" target="_blank">${item.title}</a>`;
-            tagBox.appendChild(newsItem);
-          });
-        })
-        .catch(err => {
-          console.error("Error carregant RSS:", err);
-          tagBox.innerHTML += "<p>No es van poder carregar notícies.</p>";
-        });
+      data.items.slice(0,3).forEach((item, index) => {
+        const newsItem = document.createElement("div");
+        newsItem.className = "news-item";
+
+        // Només primera notícia amb foto
+        const imgHtml = index === 0 && item.thumbnail ? `<img src="${item.thumbnail}" alt="Foto notícia">` : '';
+
+        // Data
+        const dateObj = new Date(item.pubDate);
+        const dateStr = dateObj.toLocaleDateString('ca-ES', { year: 'numeric', month: 'short', day: 'numeric' });
+
+        newsItem.innerHTML = `
+          ${imgHtml}
+          <div class="news-text">
+            <a href="${item.link}" target="_blank">${item.title}</a>
+            <span class="date">${dateStr}</span>
+          </div>
+        `;
+
+        tagBox.appendChild(newsItem);
+      });
+    })
+    .catch(err => {
+      console.error("Error carregant RSS:", err);
+      tagBox.innerHTML += "<p>No es van poder carregar notícies.</p>";
     });
-  </script>
+});
+</script>
 
 </body>
 </html>
