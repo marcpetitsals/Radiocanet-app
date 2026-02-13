@@ -143,7 +143,6 @@
     margin-top: 3px;
   }
 
-  /* FUTUR SECCIÓ */
   .future-section {
     width: 90%;
     max-width: 400px;
@@ -161,7 +160,6 @@
     margin: 0;
   }
 
-  /* Missatge sense notícies */
   .no-news {
     text-align: center;
     font-size: 13px;
@@ -172,12 +170,10 @@
 </head>
 <body>
 
-  <!-- HEADER -->
   <div class="header">
     <img src="https://ik.imagekit.io/7ftrkrun31/enacast/logos/2026/02/02/logo_canet_transparent.png?tr=w-1024" alt="Ràdio Canet Logo" class="logo">
   </div>
 
-  <!-- EMISSIÓ EN DIRECTE -->
   <div class="live-section">
     <h2>Emissió en directe</h2>
     <audio id="radioPlayer" controls>
@@ -186,13 +182,11 @@
     </audio>
   </div>
 
-  <!-- NOTICIES -->
   <div class="news-section">
     <h2>Últimes Notícies</h2>
     <div id="news-container"></div>
   </div>
 
-  <!-- FUTUR -->
   <div class="future-section">
     <h2>Properament...</h2>
   </div>
@@ -218,7 +212,7 @@ tags.forEach(tag => {
   fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(tag.rss)}`)
     .then(res => res.json())
     .then(data => {
-      if(!data.items || data.items.length === 0) {
+      if(!data.items || data.items.length === 0){
         const noNews = document.createElement("div");
         noNews.className = "no-news";
         noNews.innerText = "No hi ha notícies recents";
@@ -226,17 +220,16 @@ tags.forEach(tag => {
         return;
       }
 
-      // Ordenar totes les notícies de més recent a més antiga
+      // Ordenar per data (més recent primer)
       const sortedItems = data.items.sort((a,b) => new Date(b.pubDate) - new Date(a.pubDate));
 
-      // Agafar les 3 més recents
+      // Agafar 3 més recents
       const top3 = sortedItems.slice(0,3);
 
       top3.forEach((item,index) => {
         const newsItem = document.createElement("div");
         newsItem.className = "news-item";
 
-        // Foto només a la notícia més recent
         const imgHtml = index === 0 && item.thumbnail ? `<img src="${item.thumbnail}" alt="Foto notícia">` : '';
 
         const dateObj = new Date(item.pubDate);
