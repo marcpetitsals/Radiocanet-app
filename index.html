@@ -208,8 +208,6 @@ const tags = [
 ];
 
 const newsContainer = document.getElementById("news-container");
-const now = new Date();
-const fourWeeksAgo = new Date(now.getTime() - (28 * 24 * 60 * 60 * 1000)); // 28 dies enrere
 
 tags.forEach(tag => {
   const tagBox = document.createElement("div");
@@ -228,31 +226,17 @@ tags.forEach(tag => {
         return;
       }
 
-      // Filtrar per últims 28 dies amb validació segura
-      const recentItems = data.items.filter(item => {
-        const pubDate = new Date(item.pubDate);
-        if(isNaN(pubDate)) {
-          console.warn("Data invàlida:", item.pubDate, item.title);
-          return false;
-        }
-        return pubDate.getTime() >= fourWeeksAgo.getTime();
-      });
+      // Ordenar totes les notícies de més recent a més antiga
+      const sortedItems = data.items.sort((a,b) => new Date(b.pubDate) - new Date(a.pubDate));
 
-      if(recentItems.length === 0) {
-        const noNews = document.createElement("div");
-        noNews.className = "no-news";
-        noNews.innerText = "No hi ha notícies recents";
-        tagBox.appendChild(noNews);
-        return;
-      }
+      // Agafar les 3 més recents
+      const top3 = sortedItems.slice(0,3);
 
-      // Ordenar de més recent a més antiga
-      recentItems.sort((a,b) => new Date(b.pubDate) - new Date(a.pubDate));
-
-      recentItems.slice(0,3).forEach((item,index) => {
+      top3.forEach((item,index) => {
         const newsItem = document.createElement("div");
         newsItem.className = "news-item";
 
+        // Foto només a la notícia més recent
         const imgHtml = index === 0 && item.thumbnail ? `<img src="${item.thumbnail}" alt="Foto notícia">` : '';
 
         const dateObj = new Date(item.pubDate);
