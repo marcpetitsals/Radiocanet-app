@@ -1,20 +1,12 @@
-// ==========================
-// Reproductor de Radio en Directe
-// ==========================
-const audio = document.getElementById("radioPlayer");
-const playBtn = document.getElementById("playBtn");
+document.addEventListener("DOMContentLoaded", () => {
 
-function toggleRadio() {
-  if (audio.paused) {
-    audio.play();
-    playBtn.textContent = "⏸️ Pausar Ràdio";
-  } else {
-    audio.pause();
-    playBtn.textContent = "▶️ Reproduir Ràdio";
-  }
-}
+  // ==========================
+  // Reproductor de Radio en Directe
+  // ==========================
+  const audio = document.getElementById("radioPlayer");
+  const playBtn = document.getElementById("playBtn");
 
-playBtn.addEventListener("click", toggleRadio);
+  function toggle
 
 
 // ==========================
