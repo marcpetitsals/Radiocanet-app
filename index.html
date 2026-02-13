@@ -209,13 +209,16 @@ tags.forEach(tag => {
     .then(data => {
       if(!data.items || data.items.length === 0) return;
 
-      // Filtrar per últim mes (28 dies)
+      // Filtrar per últims 28 dies
       const recentItems = data.items.filter(item => {
         const pubDate = new Date(item.pubDate);
         return pubDate >= fourWeeksAgo;
       });
 
       if(recentItems.length === 0) return; // Si no hi ha notícies recents, no es crea la secció
+
+      // Ordenar de més recent a més antiga
+      recentItems.sort((a,b) => new Date(b.pubDate) - new Date(a.pubDate));
 
       const tagBox = document.createElement("div");
       tagBox.className = "tag-box";
