@@ -19,62 +19,38 @@
       min-height: 100vh;
     }
 
-    /* Header amb logo i títol */
+    /* Header amb logo i títol amb degradat vertical */
     .header {
       display: flex;
       flex-direction: column;
       align-items: center;
-      background: linear-gradient(to right, #3B5C96, #5EB0E5); /* Colors corporatius al header */
-      padding: 30px 20px;
+      background: linear-gradient(to bottom, #5EB0E5, white);
+      padding: 40px 20px;
       width: 100%;
       box-sizing: border-box;
+      text-align: center;
       border-bottom-left-radius: 20px;
       border-bottom-right-radius: 20px;
-      text-align: center;
     }
 
     .header img.logo {
-      height: 80px;
-      margin-bottom: 10px;
+      height: 100px;
+      margin-bottom: 15px;
     }
 
     .header h1 {
       margin: 0;
-      font-size: 28px;
-      color: white;
+      font-size: 30px;
+      font-weight: bold;
+      color: #333;
     }
 
-    /* Contenidor del reproductor */
+    /* Contenidor del reproductor tipus app mòbil */
     .player-container {
       margin-top: 50px;
       width: 90%;
-      max-width: 500px;
+      max-width: 400px;
       display: flex;
-      justify-content: center;
-    }
-
-    audio {
-      width: 100%;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-
-  </style>
-</head>
-<body>
-
-  <div class="header">
-    <img src="https://ik.imagekit.io/7ftrkrun31/enacast/logos/2026/02/02/logo_canet_transparent.png?tr=w-1024" alt="Ràdio Canet Logo" class="logo">
-    <h1>Ràdio Canet</h1>
-  </div>
-
-  <div class="player-container">
-    <audio id="radioPlayer" controls>
-      <source src="https://relay.stream.enacast-cloud.com:30149/radiocanetdemar128.mp3" type="audio/mpeg">
-      El teu navegador no suporta l'àudio en directe.
-    </audio>
-  </div>
-
-</body>
-</html>
+      flex-direction: column;
+      align-items:
 
