@@ -1,8 +1,8 @@
 {
-  "name": "Radio Canet",
+  "name": "Ràdio Canet",
   "short_name": "RadioCanet",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#cc0000"
+  "theme_color": "#3B5C96"
 }
