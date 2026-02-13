@@ -30,14 +30,14 @@
   }
 
   .header img.logo {
-    width: 250px; /* gran per ordinador */
+    width: 250px;
     height: auto;
     object-fit: contain;
   }
 
   @media (max-width: 480px) {
     .header img.logo {
-      width: 120px; /* petit per mòbil */
+      width: 120px;
     }
   }
 
@@ -160,6 +160,14 @@
     font-size: 18px;
     margin: 0;
   }
+
+  /* Missatge sense notícies */
+  .no-news {
+    text-align: center;
+    font-size: 13px;
+    color: #999;
+    font-style: italic;
+  }
 </style>
 </head>
 <body>
@@ -204,12 +212,23 @@ const now = new Date();
 const fourWeeksAgo = new Date(now.getTime() - (28 * 24 * 60 * 60 * 1000)); // 28 dies enrere
 
 tags.forEach(tag => {
+  const tagBox = document.createElement("div");
+  tagBox.className = "tag-box";
+  tagBox.innerHTML = `<h3>${tag.name}</h3>`;
+  newsContainer.appendChild(tagBox);
+
   fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(tag.rss)}`)
     .then(res => res.json())
     .then(data => {
-      if(!data.items || data.items.length === 0) return;
+      if(!data.items || data.items.length === 0) {
+        const noNews = document.createElement("div");
+        noNews.className = "no-news";
+        noNews.innerText = "No hi ha notícies recents";
+        tagBox.appendChild(noNews);
+        return;
+      }
 
-      // Filtrar per últims 28 dies amb validació segura de dates
+      // Filtrar per últims 28 dies amb validació segura
       const recentItems = data.items.filter(item => {
         const pubDate = new Date(item.pubDate);
         if(isNaN(pubDate)) {
@@ -219,24 +238,23 @@ tags.forEach(tag => {
         return pubDate.getTime() >= fourWeeksAgo.getTime();
       });
 
-      if(recentItems.length === 0) return; // Si no hi ha notícies recents, no es crea la secció
+      if(recentItems.length === 0) {
+        const noNews = document.createElement("div");
+        noNews.className = "no-news";
+        noNews.innerText = "No hi ha notícies recents";
+        tagBox.appendChild(noNews);
+        return;
+      }
 
       // Ordenar de més recent a més antiga
       recentItems.sort((a,b) => new Date(b.pubDate) - new Date(a.pubDate));
-
-      const tagBox = document.createElement("div");
-      tagBox.className = "tag-box";
-      tagBox.innerHTML = `<h3>${tag.name}</h3>`;
-      newsContainer.appendChild(tagBox);
 
       recentItems.slice(0,3).forEach((item,index) => {
         const newsItem = document.createElement("div");
         newsItem.className = "news-item";
 
-        // Foto només a la notícia més recent
         const imgHtml = index === 0 && item.thumbnail ? `<img src="${item.thumbnail}" alt="Foto notícia">` : '';
 
-        // Data en format readable
         const dateObj = new Date(item.pubDate);
         const dateStr = dateObj.toLocaleDateString('ca-ES', { year: 'numeric', month: 'short', day: 'numeric' });
 
@@ -249,8 +267,15 @@ tags.forEach(tag => {
         `;
         tagBox.appendChild(newsItem);
       });
+
     })
-    .catch(err => console.error("Error carregant RSS:", err));
+    .catch(err => {
+      console.error("Error carregant RSS:", err);
+      const noNews = document.createElement("div");
+      noNews.className = "no-news";
+      noNews.innerText = "Error carregant les notícies";
+      tagBox.appendChild(noNews);
+    });
 });
 </script>
 
