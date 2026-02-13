@@ -1,103 +1,39 @@
+/* General */
 body {
-  margin: 0;
+  background-color: white;
   font-family: Arial, sans-serif;
-  background: #f2f2f2;
-  color: #000;
+  color: #3B5C96;
+  margin: 0;
+  padding: 0;
 }
 
-.app {
-  padding: 20px;
-  max-width: 600px;
-  margin: auto;
-}
-
-h1 {
-  text-align: center;
-  color: #cc0000;
-}
-
-.player-card {
-  background: #cc0000;
-  color: white;
-  padding: 20px;
-  border-radius: 12px;
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-button {
-  background: white;
-  color: #cc0000;
-  border: none;
-  padding: 12px 25px;
-  font-size: 16px;
-  border-radius: 25px;
-  cursor: pointer;
-  margin-top: 15px;
-  font-weight: bold;
-}
-
-.section {
-  background: white;
-  padding: 15px;
-  border-radius: 10px;
-  margin-bottom: 20px;
-}
-
-.section h2 {
-  color: #cc0000;
-}
-
-.news-item, .podcast-item {
-  margin-bottom: 10px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #ddd;
-}
-
-a {
-  text-decoration: none;
-  color: #cc0000;
-  font-weight: bold;
-}
-.news-card {
+/* Header amb logo i títol */
+.header {
   display: flex;
   align-items: center;
-  gap: 10px;
-  background: white;
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 10px;
-  text-decoration: none;
-  color: #333;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  justify-content: center;
+  background: linear-gradient(to right, #3B5C96, #5EB0E5);
+  padding: 20px;
+  color: white;
 }
 
-.news-img {
-  width: 70px;
-  height: 70px;
-  object-fit: cover;
-  border-radius: 8px;
+.header h1 {
+  margin-left: 15px;
+  font-size: 28px;
 }
 
-.news-text {
-  font-size: 14px;
-  font-weight: bold;
+.header .logo {
+  height: 50px;
 }
 
-.podcast-program {
-  margin-bottom: 25px;
+/* Contenidor del reproductor */
+.player-container {
+  display: flex;
+  justify-content: center;
+  margin: 40px 20px;
 }
 
-.podcast-episode {
-  background: white;
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.episode-title {
-  font-weight: bold;
-  margin-bottom: 5px;
-  font-size: 14px;
+audio {
+  width: 100%;
+  max-width: 500px;
 }
