@@ -7,10 +7,10 @@ const playBtn = document.getElementById("playBtn");
 function toggleRadio() {
   if (audio.paused) {
     audio.play();
-    playBtn.textContent = "⏸️ Pausar Radio";
+    playBtn.textContent = "⏸️ Pausar Ràdio";
   } else {
     audio.pause();
-    playBtn.textContent = "▶️ Reproduir Radio";
+    playBtn.textContent = "▶️ Reproduir Ràdio";
   }
 }
 
@@ -24,8 +24,8 @@ const programs = [
   { name: "Informatiu", slug: "informatiumigdia" },
   { name: "Tal com sona", slug: "tal-com" },
   { name: "Ona Maresme", slug: "onamaresme" },
-  { name: "Ple municipal", slug: "plemunicipal" },
-  { name: "Ple extraordinari", slug: "pleextraordinari" },
+  { name: "Ple Municipal", slug: "plemunicipal" },
+  { name: "Ple Extraordinari", slug: "pleextraordinari" },
   { name: "Oxigen", slug: "fake-news" }
 ];
 
@@ -46,7 +46,7 @@ programs.forEach(program => {
     .then(res => res.json())
     .then(data => {
       if (!data.items || data.items.length === 0) {
-        section.innerHTML += "<p>No hay episodios disponibles.</p>";
+        section.innerHTML += "<p>No hi ha episodis disponibles.</p>";
         return;
       }
 
@@ -65,6 +65,6 @@ programs.forEach(program => {
     })
     .catch(err => {
       console.error("Error cargando RSS:", err);
-      section.innerHTML += "<p>No se pudieron cargar episodios.</p>";
+      section.innerHTML += "<p>No s'han pogut carregar.</p>";
     });
 });
