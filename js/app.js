@@ -19,15 +19,22 @@ fetch(NEWS_URL)
     const container = document.getElementById("news");
     container.innerHTML = "";
 
-    data.forEach(title => {
-      const div = document.createElement("div");
-      div.className = "news-item";
-      div.textContent = title;
-      container.appendChild(div);
+    data.forEach(item => {
+      const card = document.createElement("a");
+      card.href = item.link;
+      card.target = "_blank";
+      card.className = "news-card";
+
+      card.innerHTML = `
+        <img src="${item.image}" class="news-img">
+        <div class="news-text">${item.title}</div>
+      `;
+
+      container.appendChild(card);
     });
   })
   .catch(err => {
-    console.error("Error cargando noticias:", err);
     document.getElementById("news").textContent = "No se pudieron cargar las noticias.";
   });
+
 
