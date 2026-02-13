@@ -1,35 +1,26 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="ca">
 <head>
   <meta charset="UTF-8">
-  <title>Ràdio Canet</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="manifest" href="manifest.json">
-  <link rel="stylesheet" href="css/styles.css">
+  <title>Ràdio Canet en directe</title>
+  <link rel="icon" href="logo.png"> <!-- Posa aquí el logo real -->
+  <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
 
-  <div class="app">
-
-    <h1>📻 Ràdio Canet</h1>
-
-    <div class="player-card">
-      <h2>En Directe</h2>
-      <audio id="radioPlayer">
-        <source src="https://relay.stream.enacast-cloud.com:30149/radiocanetdemar128.mp3" type="audio/mpeg">
-      </audio>
-      <button onclick="toggleRadio()" id="playButton">▶ Escoltar</button>
-    </div>
-
-    <div class="section">
-      <h2>🎙️ Podcasts</h2>
-      <div id="podcasts"></div>
-    </div>
-
+  <div class="header">
+    <img src="logo.png" alt="Ràdio Canet Logo" class="logo">
+    <h1>Ràdio Canet</h1>
   </div>
 
-<script src="js/app.js"></script>
+  <div class="player-container">
+    <audio id="radioPlayer" controls>
+      <source src="https://relay.stream.enacast-cloud.com:30149/radiocanetdemar128.mp3" type="audio/mpeg">
+      El teu navegador no suporta l'àudio en directe.
+    </audio>
+  </div>
 
 </body>
+<script src="app.js"></script>
 </html>
