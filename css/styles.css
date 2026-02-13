@@ -83,3 +83,21 @@ a {
   font-size: 14px;
   font-weight: bold;
 }
+
+.podcast-program {
+  margin-bottom: 25px;
+}
+
+.podcast-episode {
+  background: white;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.episode-title {
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
