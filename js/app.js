@@ -22,7 +22,7 @@ playBtn.addEventListener("click", toggleRadio);
 // ==========================
 const programs = [
   { name: "Informatiu", slug: "informatiumigdia" },
-  { name: "Tal com sona", slug: "tal-com" },
+  { name: "Tal com Sona", slug: "tal-com" },
   { name: "Ona Maresme", slug: "onamaresme" },
   { name: "Ple Municipal", slug: "plemunicipal" },
   { name: "Ple Extraordinari", slug: "pleextraordinari" },
