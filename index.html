@@ -4,13 +4,67 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ràdio Canet en directe</title>
-  <link rel="icon" href="logo.png"> <!-- Posa aquí el logo real -->
-  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* General */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: white; /* Fons blanc */
+      color: #333; /* Color primari */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+    }
+
+    /* Header amb logo i títol */
+    .header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: linear-gradient(to right, #3B5C96, #5EB0E5); /* Colors corporatius al header */
+      padding: 30px 20px;
+      width: 100%;
+      box-sizing: border-box;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+      text-align: center;
+    }
+
+    .header img.logo {
+      height: 80px;
+      margin-bottom: 10px;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 28px;
+      color: white;
+    }
+
+    /* Contenidor del reproductor */
+    .player-container {
+      margin-top: 50px;
+      width: 90%;
+      max-width: 500px;
+      display: flex;
+      justify-content: center;
+    }
+
+    audio {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+  </style>
 </head>
 <body>
 
   <div class="header">
-    <img src="logo.png" alt="Ràdio Canet Logo" class="logo">
+    <img src="https://ik.imagekit.io/7ftrkrun31/enacast/logos/2026/02/02/logo_canet_transparent.png?tr=w-1024" alt="Ràdio Canet Logo" class="logo">
     <h1>Ràdio Canet</h1>
   </div>
 
@@ -22,5 +76,5 @@
   </div>
 
 </body>
-<script src="app.js"></script>
 </html>
+
