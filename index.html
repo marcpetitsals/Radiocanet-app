@@ -209,10 +209,14 @@ tags.forEach(tag => {
     .then(data => {
       if(!data.items || data.items.length === 0) return;
 
-      // Filtrar per últims 28 dies
+      // Filtrar per últims 28 dies amb validació segura de dates
       const recentItems = data.items.filter(item => {
         const pubDate = new Date(item.pubDate);
-        return pubDate >= fourWeeksAgo;
+        if(isNaN(pubDate)) {
+          console.warn("Data invàlida:", item.pubDate, item.title);
+          return false;
+        }
+        return pubDate.getTime() >= fourWeeksAgo.getTime();
       });
 
       if(recentItems.length === 0) return; // Si no hi ha notícies recents, no es crea la secció
