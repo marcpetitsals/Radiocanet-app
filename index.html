@@ -200,8 +200,8 @@ const tags = [
 ];
 
 const newsContainer = document.getElementById("news-container");
-const oneMonthAgo = new Date();
-oneMonthAgo.setMonth(oneMonthAgo.getMonth() -1);
+const now = new Date();
+const fourWeeksAgo = new Date(now.getTime() - (28 * 24 * 60 * 60 * 1000)); // 28 dies enrere
 
 tags.forEach(tag => {
   fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(tag.rss)}`)
@@ -209,13 +209,13 @@ tags.forEach(tag => {
     .then(data => {
       if(!data.items || data.items.length === 0) return;
 
-      // Filtrar per últim mes
+      // Filtrar per últim mes (28 dies)
       const recentItems = data.items.filter(item => {
         const pubDate = new Date(item.pubDate);
-        return pubDate >= oneMonthAgo;
+        return pubDate >= fourWeeksAgo;
       });
 
-      if(recentItems.length === 0) return; // Si cap notícia recent, no apareix la secció
+      if(recentItems.length === 0) return; // Si no hi ha notícies recents, no es crea la secció
 
       const tagBox = document.createElement("div");
       tagBox.className = "tag-box";
@@ -226,8 +226,10 @@ tags.forEach(tag => {
         const newsItem = document.createElement("div");
         newsItem.className = "news-item";
 
+        // Foto només a la notícia més recent
         const imgHtml = index === 0 && item.thumbnail ? `<img src="${item.thumbnail}" alt="Foto notícia">` : '';
 
+        // Data en format readable
         const dateObj = new Date(item.pubDate);
         const dateStr = dateObj.toLocaleDateString('ca-ES', { year: 'numeric', month: 'short', day: 'numeric' });
 
